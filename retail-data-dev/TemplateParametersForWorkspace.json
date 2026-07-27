@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "retail-data-dev"
+		},
+		"retail-data-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:retail-data.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"retail-data-dev-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:retail-data-dev.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"retail-data-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://rawbatch1.dfs.core.windows.net"
+		},
+		"retail-data-dev-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://retaildata2.dfs.core.windows.net"
+		}
+	}
+}
