@@ -1,5 +1,5 @@
 {
-	"name": "Notebook 1",
+	"name": "nb_bronze_ingest",
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "7d2a8124-0b6d-426a-8803-6f3d7419e6df"
+				"spark.autotune.trackingId": "a64c6f7a-643d-4780-9d62-b159b2d14f33"
 			}
 		},
 		"metadata": {
@@ -31,10 +31,10 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/11d8a331-b015-41ea-996c-d8cbb4d0b8b4/resourceGroups/e_commerce_analytics/providers/Microsoft.Synapse/workspaces/retail-data/bigDataPools/sparkpool",
+				"id": "/subscriptions/a47e9b86-4c4c-42b5-b9fb-130a38bf56c8/resourceGroups/e_commerce_analytics/providers/Microsoft.Synapse/workspaces/retail-data-dev/bigDataPools/sparkpool",
 				"name": "sparkpool",
 				"type": "Spark",
-				"endpoint": "https://retail-data.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpool",
+				"endpoint": "https://retail-data-dev.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpool",
 				"auth": {
 					"type": "AAD",
 					"authResource": "https://dev.azuresynapse.net"
@@ -63,11 +63,11 @@
 					"customers_df = spark.read.format(\"csv\") \\\n",
 					"    .option(\"header\",\"true\") \\\n",
 					"    .option(\"inferSchema\", \"true\")\\\n",
-					"    .load(\"abfss://reatail-data@ecomdevstore.dfs.core.windows.net/customers/*\")\n",
+					"    .load(\"abfss://retail-data@ecomdevstore1.dfs.core.windows.net/customers/*\")\n",
 					"\n",
 					"display(customers_df)"
 				],
-				"execution_count": 4
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -88,12 +88,17 @@
 			},
 			{
 				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": false
+					}
+				},
 				"source": [
 					"bronze_df.write.format(\"delta\") \\\n",
 					"    .mode(\"overwrite\")  \\\n",
-					"    .save(\"abfss://bronze@ecomdevstore.dfs.core.windows.net/customers/\")"
+					"    .save(\"abfss://bronze@ecomdevstore1.dfs.core.windows.net/customers/\")"
 				],
-				"execution_count": 8
+				"execution_count": 9
 			}
 		]
 	}
