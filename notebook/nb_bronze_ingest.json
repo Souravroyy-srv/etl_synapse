@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "a64c6f7a-643d-4780-9d62-b159b2d14f33"
+				"spark.autotune.trackingId": "b76a3e85-1cca-45d0-b946-600718eeafb8"
 			}
 		},
 		"metadata": {
@@ -63,42 +63,17 @@
 					"customers_df = spark.read.format(\"csv\") \\\n",
 					"    .option(\"header\",\"true\") \\\n",
 					"    .option(\"inferSchema\", \"true\")\\\n",
-					"    .load(\"abfss://retail-data@ecomdevstore1.dfs.core.windows.net/customers/*\")\n",
+					"    .load(f\"abfss://{source_container}@ecomdevstore1.dfs.core.windows.net/{source_folder}/*\")\n",
 					"\n",
-					"display(customers_df)"
-				],
-				"execution_count": 6
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"outputs_hidden": true
-					},
-					"collapsed": false
-				},
-				"source": [
 					"bronze_df = customers_df \\\n",
 					"    .withColumn(\"file_path\", input_file_name()) \\\n",
 					"    .withColumn(\"last_update_ts\", current_timestamp())\n",
 					"\n",
-					"display(bronze_df)"
-				],
-				"execution_count": 7
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
-					"jupyter": {
-						"outputs_hidden": false
-					}
-				},
-				"source": [
 					"bronze_df.write.format(\"delta\") \\\n",
 					"    .mode(\"overwrite\")  \\\n",
-					"    .save(\"abfss://bronze@ecomdevstore1.dfs.core.windows.net/customers/\")"
+					"    .save(\"abfss://{target_container}@ecomdevstore1.dfs.core.windows.net/{target_folder}/\")"
 				],
-				"execution_count": 9
+				"execution_count": 6
 			}
 		]
 	}

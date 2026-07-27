@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE [dbo].[metatable]\n(\n    source_container VARCHAR(20),\n    source_folder VARCHAR(20),\n    target_container VARCHAR(20),\n    target_folder VARCHAR(20)\n)\n\ninsert into [dbo].[metatable] (source_container, source_folder ,target_container,target_folder)\nvalues\n    ('retail-data','customers','bronze','customers')\n\ninsert into [dbo].[metatable] (source_container, source_folder ,target_container,target_folder)\nvalues    ('retail-data','sales','bronze','sales')\n\ninsert into [dbo].[metatable] (source_container, source_folder ,target_container,target_folder)\nvalues    ('retail-data','sales_orders','bronze','sales_orders')\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sqlpool",
+				"poolName": "sqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

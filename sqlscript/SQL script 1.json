@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "create external data source bronze_source\nwith (\n    location = 'https://ecomdevstore1.blob.core.windows.net/bronze/'\n)\n\ncreate external file format DeltaFormat\nwith(\n    FORMAT_TYPE = delta\n)\n\ncreate external table dbo.customers\n(\n    customer_id INT,\n    tax_id DOUBLE PRECISION,\n    tax_code VARCHAR(50),\n    customer_name VARCHAR(255),\n    state VARCHAR(100),\n    city VARCHAR(100),\n    postcode VARCHAR(20),\n    street VARCHAR(255),\n    number VARCHAR(50),\n    unit VARCHAR(50),\n    region VARCHAR(100),\n    district VARCHAR(100),\n    lon DOUBLE PRECISION,\n    lat DOUBLE PRECISION,\n    ship_to_address VARCHAR(500),\n    valid_from INT,\n    valid_to DOUBLE PRECISION,\n    units_purchased INT,\n    loyalty_segment INT,\n    file_path VARCHAR(1000), \n    last_update_ts DATETIME\n\n)\nwith(\n    location = 'customers/',\n    Data_source = bronze_source,\n    file_format = DeltaFormat\n)",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "bronze_db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
